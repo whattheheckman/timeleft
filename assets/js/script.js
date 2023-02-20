@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.js-option[data-option="week"] .option-2').classList.add('option-active');
         firstDaySunday = false;
     });
-    
+
     document.querySelector('.js-option[data-option="decade"] .option-1').addEventListener('click', e => {
         e.preventDefault();
         createCookie('timegrid_decade_starts', '1', 999);
@@ -65,18 +65,18 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.js-option[data-option="decade"] .option-2').classList.add('option-active');
         decadeStartsZero = false;
     });
-    
+
     document.querySelector('.toggle-privacy').addEventListener('click', e => {
         e.preventDefault();
         document.querySelector('#privacy').classList.toggle('is-active');
     });
     document.querySelector('#privacy').addEventListener('click', (e) => {
-        if (e.target == e.currentTarget ) {
-            document.querySelector('#privacy').classList.remove('is-active');   
+        if (e.target == e.currentTarget) {
+            document.querySelector('#privacy').classList.remove('is-active');
         }
     });
     document.querySelector('.close-privacy').addEventListener('click', (e) => {
-        document.querySelector('#privacy').classList.remove('is-active');   
+        document.querySelector('#privacy').classList.remove('is-active');
     });
 
     document.querySelectorAll('.f-time').forEach(item => {
@@ -172,7 +172,7 @@ function timeleft() {
         hour = now.getHours(),
         time = now.getTime(),
         yearLastDigit = year.toString().substring(3);
-    
+
     var firstDayOfYear = new Date(year, 0, 1);
     var numberOfDays = Math.floor((now - firstDayOfYear) / (24 * 60 * 60 * 1000));
     let week = Math.ceil((weekday + 1 + numberOfDays) / 7);
@@ -206,7 +206,7 @@ function timeleft() {
                 diff = time - start;
                 amount = diff / msHour;
 
-                msLeft = Math.round((end - time));
+                msLeft = end - time; //Math.rounding this makes it slower?
                 item.querySelector('.f-time-specs-ms').innerText = numberWithCommas(msLeft);
                 secondsLeft = Math.floor((end - time) * 0.001);
                 item.querySelector('.f-time-specs-s').innerText = numberWithCommas(secondsLeft);
@@ -349,7 +349,7 @@ function timeleft() {
             case 'century':
                 start = new Date(2001, 0).getTime();
                 end = new Date(2101, 0).getTime();
-                if ( decadeStartsZero ) {
+                if (decadeStartsZero) {
                     start = new Date(2000, 0).getTime();
                     end = new Date(2100, 0).getTime();
                 }
