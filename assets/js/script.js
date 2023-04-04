@@ -1,5 +1,9 @@
 let firstDaySunday = false;
 let decadeStartsZero = false;
+let updateSpeed = false;
+let updateFastMs = 1;
+let updateSlowMS = 123;
+let currentUpdateSpeed = updateFastMs;
 
 if (getCookie('timegrid_week_start') && getCookie('timegrid_week_start') == '1') {
     firstDaySunday = true;
@@ -14,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     timeleft();
     setInterval(() => { //the number amount in this function should set how often the function fires in milliseconds
         timeleft();
-    }, 1);
+    }, currentUpdateSpeed);
 
     document.querySelectorAll('.js-option').forEach(item => {
         let type = item.dataset.option;
@@ -33,6 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     item.querySelector('.option-2').classList.add('option-active');
                 }
                 break;
+            case 'speed':
+                if (condition) {
+
+                } else {
+
+                }
         }
     });
 
@@ -64,6 +74,21 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.js-option[data-option="decade"] .option-1').classList.remove('option-active');
         document.querySelector('.js-option[data-option="decade"] .option-2').classList.add('option-active');
         decadeStartsZero = false;
+    });
+
+    document.querySelector('.js-option[data-option="speed"] .option-1').addEventListener('click', e => {
+        e.preventDefault();
+        createCookie('timegrid_speed_starts', '1', 999);
+        document.querySelector('.js-option[data-option="speed"] .option-1').classList.add('option-active');
+        document.querySelector('.js-option[data-option="speed"] .option-2').classList.remove('option-active');
+        currentUpdateSpeed = updateSlowMS;
+    });
+    document.querySelector('.js-option[data-option="speed"] .option-2').addEventListener('click', e => {
+        e.preventDefault();
+        deleteCookie('timegrid_speed_starts', '1', 999);
+        document.querySelector('.js-option[data-option="speed"] .option-1').classList.remove('option-active');
+        document.querySelector('.js-option[data-option="speed"] .option-2').classList.add('option-active');
+        currentUpdateSpeed = updateFastMs;
     });
 
     document.querySelector('.toggle-privacy').addEventListener('click', e => {
