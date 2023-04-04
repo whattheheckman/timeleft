@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     timeleft();
-    setInterval(() => {
+    setInterval(() => { //the number amount in this function should set how often the function fires in milliseconds
         timeleft();
-    }, 123);
+    }, 1);
 
     document.querySelectorAll('.js-option').forEach(item => {
         let type = item.dataset.option;
