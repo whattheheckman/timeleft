@@ -11,6 +11,9 @@ if (getCookie('timegrid_week_start') && getCookie('timegrid_week_start') == '1')
 if (getCookie('timegrid_decade_starts') && getCookie('timegrid_decade_starts') == '1') {
     decadeStartsZero = true;
 }
+if (getCookie('timegrid_update_speed') && getCookie('timegrid_update_speed') == '1') {
+    decadeStartsZero = true;
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -38,11 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 break;
             case 'speed':
-                if (condition) {
-
+                if (getCookie('timegrid_update_speed') && getCookie('timegrid_update_speed') == '1') {
+                    item.querySelector('.option-1').classList.add('option-active');
                 } else {
-
+                    item.querySelector('.option-2').classList.add('option-active');
                 }
+                break;
         }
     });
 
@@ -78,14 +82,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('.js-option[data-option="speed"] .option-1').addEventListener('click', e => {
         e.preventDefault();
-        createCookie('timegrid_speed_starts', '1', 999);
+        createCookie('timegrid_update_speed', '1', 999);
         document.querySelector('.js-option[data-option="speed"] .option-1').classList.add('option-active');
         document.querySelector('.js-option[data-option="speed"] .option-2').classList.remove('option-active');
         currentUpdateSpeed = updateSlowMS;
     });
     document.querySelector('.js-option[data-option="speed"] .option-2').addEventListener('click', e => {
         e.preventDefault();
-        deleteCookie('timegrid_speed_starts', '1', 999);
+        deleteCookie('timegrid_update_speed', '1', 999);
         document.querySelector('.js-option[data-option="speed"] .option-1').classList.remove('option-active');
         document.querySelector('.js-option[data-option="speed"] .option-2').classList.add('option-active');
         currentUpdateSpeed = updateFastMs;
