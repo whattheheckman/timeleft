@@ -4,6 +4,7 @@ let updateSpeed = false;
 let updateFastMs = 1;
 let updateSlowMS = 123;
 let currentUpdateSpeed = updateFastMs;
+let functionID = null;
 
 if (getCookie('timegrid_week_start') && getCookie('timegrid_week_start') == '1') {
     firstDaySunday = true;
@@ -12,14 +13,14 @@ if (getCookie('timegrid_decade_starts') && getCookie('timegrid_decade_starts') =
     decadeStartsZero = true;
 }
 if (getCookie('timegrid_update_speed') && getCookie('timegrid_update_speed') == '1') {
-    decadeStartsZero = true;
+    currentUpdateSpeed = updateSlowMS;
 }
 
 document.addEventListener('DOMContentLoaded', function () {
 
 
     timeleft();
-    setInterval(() => { //the number amount in this function should set how often the function fires in milliseconds
+    functionID = setInterval(() => { //the number amount in this function should set how often the function fires in milliseconds
         timeleft();
     }, currentUpdateSpeed);
 
@@ -86,6 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.js-option[data-option="speed"] .option-1').classList.add('option-active');
         document.querySelector('.js-option[data-option="speed"] .option-2').classList.remove('option-active');
         currentUpdateSpeed = updateSlowMS;
+        clearInterval(functionID);
+        setInterval(() => { //the number amount in this function should set how often the function fires in milliseconds
+            timeleft();
+        }, currentUpdateSpeed);
+
     });
     document.querySelector('.js-option[data-option="speed"] .option-2').addEventListener('click', e => {
         e.preventDefault();
@@ -93,6 +99,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.js-option[data-option="speed"] .option-1').classList.remove('option-active');
         document.querySelector('.js-option[data-option="speed"] .option-2').classList.add('option-active');
         currentUpdateSpeed = updateFastMs;
+        clearInterval(functionID);
+        setInterval(() => { //the number amount in this function should set how often the function fires in milliseconds
+            timeleft();
+        }, currentUpdateSpeed);
     });
 
     document.querySelector('.toggle-privacy').addEventListener('click', e => {
