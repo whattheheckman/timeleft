@@ -6,13 +6,13 @@ let updateSlowMS = 123;
 let currentUpdateSpeed = updateFastMs;
 let functionID = null;
 
-if (getCookie('timegrid_week_start') && getCookie('timegrid_week_start') == '1') {
+if (getCookie('timeleft_week_start') && getCookie('timeleft_week_start') == '1') {
     firstDaySunday = true;
 }
-if (getCookie('timegrid_decade_starts') && getCookie('timegrid_decade_starts') == '1') {
+if (getCookie('timeleft_decade_starts') && getCookie('timeleft_decade_starts') == '1') {
     decadeStartsZero = true;
 }
-if (getCookie('timegrid_update_speed') && getCookie('timegrid_update_speed') == '1') {
+if (getCookie('timeleft_update_speed') && getCookie('timeleft_update_speed') == '1') {
     currentUpdateSpeed = updateSlowMS;
 }
 
@@ -28,21 +28,21 @@ document.addEventListener('DOMContentLoaded', function () {
         let type = item.dataset.option;
         switch (type) {
             case 'week':
-                if (getCookie('timegrid_week_start') && getCookie('timegrid_week_start') == '1') {
+                if (getCookie('timeleft_week_start') && getCookie('timeleft_week_start') == '1') {
                     item.querySelector('.option-1').classList.add('option-active');
                 } else {
                     item.querySelector('.option-2').classList.add('option-active');
                 }
                 break;
             case 'decade':
-                if (getCookie('timegrid_decade_starts') && getCookie('timegrid_decade_starts') == '1') {
+                if (getCookie('timeleft_decade_starts') && getCookie('timeleft_decade_starts') == '1') {
                     item.querySelector('.option-1').classList.add('option-active');
                 } else {
                     item.querySelector('.option-2').classList.add('option-active');
                 }
                 break;
             case 'speed':
-                if (getCookie('timegrid_update_speed') && getCookie('timegrid_update_speed') == '1') {
+                if (getCookie('timeleft_update_speed') && getCookie('timeleft_update_speed') == '1') {
                     item.querySelector('.option-1').classList.add('option-active');
                 } else {
                     item.querySelector('.option-2').classList.add('option-active');
@@ -53,14 +53,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('.js-option[data-option="week"] .option-1').addEventListener('click', e => {
         e.preventDefault();
-        createCookie('timegrid_week_start', '1', 999);
+        createCookie('timeleft_week_start', '1', 999);
         document.querySelector('.js-option[data-option="week"] .option-1').classList.add('option-active');
         document.querySelector('.js-option[data-option="week"] .option-2').classList.remove('option-active');
         firstDaySunday = true;
     });
     document.querySelector('.js-option[data-option="week"] .option-2').addEventListener('click', e => {
         e.preventDefault();
-        deleteCookie('timegrid_week_start', '1', 999);
+        deleteCookie('timeleft_week_start', '1', 999);
         document.querySelector('.js-option[data-option="week"] .option-1').classList.remove('option-active');
         document.querySelector('.js-option[data-option="week"] .option-2').classList.add('option-active');
         firstDaySunday = false;
@@ -68,14 +68,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('.js-option[data-option="decade"] .option-1').addEventListener('click', e => {
         e.preventDefault();
-        createCookie('timegrid_decade_starts', '1', 999);
+        createCookie('timeleft_decade_starts', '1', 999);
         document.querySelector('.js-option[data-option="decade"] .option-1').classList.add('option-active');
         document.querySelector('.js-option[data-option="decade"] .option-2').classList.remove('option-active');
         decadeStartsZero = true;
     });
     document.querySelector('.js-option[data-option="decade"] .option-2').addEventListener('click', e => {
         e.preventDefault();
-        deleteCookie('timegrid_decade_starts', '1', 999);
+        deleteCookie('timeleft_decade_starts', '1', 999);
         document.querySelector('.js-option[data-option="decade"] .option-1').classList.remove('option-active');
         document.querySelector('.js-option[data-option="decade"] .option-2').classList.add('option-active');
         decadeStartsZero = false;
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('.js-option[data-option="speed"] .option-1').addEventListener('click', e => {
         e.preventDefault();
-        createCookie('timegrid_update_speed', '1', 999);
+        createCookie('timeleft_update_speed', '1', 999);
         document.querySelector('.js-option[data-option="speed"] .option-1').classList.add('option-active');
         document.querySelector('.js-option[data-option="speed"] .option-2').classList.remove('option-active');
         currentUpdateSpeed = updateSlowMS;
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.querySelector('.js-option[data-option="speed"] .option-2').addEventListener('click', e => {
         e.preventDefault();
-        deleteCookie('timegrid_update_speed', '1', 999);
+        deleteCookie('timeleft_update_speed', '1', 999);
         document.querySelector('.js-option[data-option="speed"] .option-1').classList.remove('option-active');
         document.querySelector('.js-option[data-option="speed"] .option-2').classList.add('option-active');
         currentUpdateSpeed = updateFastMs;
